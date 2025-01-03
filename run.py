@@ -65,6 +65,7 @@ def fileManage():
             # brand 및 genre 폴더 경로 생성
             brandPath = sortFolder / brand
             genrePath = brandPath / genre
+            print(brandPath, genrePath)
             brandPath.mkdir(parents=True, exist_ok=True)
             genrePath.mkdir(parents=True, exist_ok=True)
 
@@ -72,10 +73,20 @@ def fileManage():
             source = beforeFolderPath / curMp3FileName
             destination = genrePath / curMp3FileName
             shutil.move(str(source), str(destination))
+            print(f'{curMp3FileName} 이동 완료.')
         else:
             print(f'{curMp3FileName}는 데이터베이스에 없는 노래입니다.')
 
+    print("파일 정렬 완료.")
     conn.close()
 
 
-fileManage()
+def main():
+    try:
+        fileManage()
+    except:
+        print("에러 발생")
+        return
+
+
+main()
